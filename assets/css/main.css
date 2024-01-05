@@ -3204,6 +3204,7 @@ input, select, textarea {
 
 		}
 
+
 		@media screen and (max-width: 480px) {
 
 			#header nav a[href="#menu"] {
@@ -3805,6 +3806,8 @@ input, select, textarea {
 				box-shadow: inset 0 -1px 0 0 #555867, 0 1px 0 0 #555867;
 			}
 
+	
+
 		.wrapper.spotlight {
 			background-color: #4c5c96;
 		}
@@ -3945,6 +3948,7 @@ input, select, textarea {
 				.wrapper.spotlight.style6:after {
 					box-shadow: inset 0 -1px 0 0 #2d3a69, 0 1px 0 0 #2d3a69;
 				}
+				
 
 		@media screen and (max-width: 980px) {
 
