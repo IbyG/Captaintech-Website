@@ -1,0 +1,188 @@
+<!DOCTYPE HTML>
+<!--
+	Solid State by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title> Automating Recurring Payments: A Deep Dive into Shopify-Zoho Subscriptions Integration</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="../assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="../assets/css/noscript.css" /></noscript>
+	</head>
+	<body class="is-preload">
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+				<!--
+				<header id="header">
+						<h1><a href="index.html">Solid State</a></h1> 
+						<nav>
+							<a href="#menu">Menu</a>
+						</nav>
+					</header>
+				-->
+				<!-- Menu -->
+					<nav id="menu">
+						<div class="inner">
+							<h2>Menu</h2>
+							<ul class="links">
+								<li><a href="../index.html">Home</a></li>
+								<li><a href="../works.html">Works</a></li>
+								<li><a href="elements.html">Elements</a></li>
+								<li><a href="#">Log In</a></li>
+								<li><a href="#">Sign Up</a></li>
+							</ul>
+							<a href="#" class="close">Close</a>
+						</div>
+					</nav>
+
+				<!-- Wrapper -->
+					<section id="wrapper">
+						<header>
+							<div class="inner">
+								<h2>Automating Recurring Payments: A Deep Dive into Shopify-Zoho Subscriptions Integration</h2>
+								<!--<p>Unlock the potential of your subscription-based business with our in-depth guide on integrating Shopify with Zoho Subscriptions. 
+									This article provides a high-level solution for businesses aiming to simplify their recurring payments and gain valuable insights into monthly order volumes. 
+									By seamlessly transforming Shopify order webhooks into automated recurring payments in Zoho Subscriptions, businesses can eliminate manual processes and significantly reduce administrative overhead. 
+									This integration not only streamlines operations but also offers a clear understanding of monthly order volumes, empowering merchants with real-time tracking, reporting, and forecasting capabilities. 
+									Learn how to optimize inventory management, meet customer demands, and make informed decisions based on accurate data. 
+									Whether you're a small business or an enterprise-level operation, this guide equips you with the knowledge to leverage technology for enhanced automation, efficiency, and scalability, making your subscription business more streamlined and profitable.
+								</p> -->
+							</div>
+						</header>
+
+						<!-- Content -->
+							<div class="wrapper">
+								<div class="inner">
+
+									<h3 class="major">Introduction</h3>
+									<p>
+										E-commerce has revolutionised the way we buy and fulfill orders online. 
+										While popular platforms like Shopify and WooCommerce excel at facilitating one-time purchases, 
+										they often fall short when it comes to managing recurring orders, such as monthly pet food or weekly prepped meals. 
+										Many businesses resort to installing plugins like Recharge or Bold to address this gap. However, consider a more cost-effective 
+										alternative: Zoho Subscriptions. Despite the popularity of Recharge and Bold, Zoho Subscriptions offers a comparable solution at a 
+										fraction of the cost. In this article, we'll explore how Zoho Subscriptions can achieve the same outcomes, providing a seamless and 
+										economical approach to handling recurring orders.
+									</p>
+
+									
+
+									<h3 class="major">Solution</h3>
+									<img src="../videos/shopify-subscriptions.gif" alt="solution flow" style="display: block; margin: auto; width: 900px; height: 500px;"><br>
+									
+									<h4 class="major">Shopify</h4>
+									<p>
+										In this streamlined solution, Shopify takes center stage as the primary source of truth, 
+										initiating the process seamlessly upon payment completion for an order. Leveraging the power of Shopify webhooks, 
+										the entire data transmission to Zoho Subscriptions is automated, eliminating the need for constructing a portal or executing an API GET request. 
+										The 'Order JSON data' serves as a comprehensive package, containing all the essential information required for the creation of a subscription 
+										order within Zoho Subscriptions. Consequently, the webhook operation becomes simplified, focusing solely on pushing the order data through. 
+										Notably, the default order JSON output encompasses critical details such as contact information, shipping/billing details, currency, and the 
+										line items, facilitating a smooth and efficient integration between Shopify and Zoho Subscriptions.
+									</p>
+
+									<h4 class="major">Zoho Flow</h4>
+									<p>Zoho Flow serves as the vital intermediary bridging the communication gap between Shopify and Zoho Subscriptions. 
+										Tasked with receiving the Order JSON data, this middleware employs custom code and field mapping to skillfully transform the incoming data into a 
+										format compatible with Zoho Subscriptions. In doing so, it efficiently creates or updates contact details, item specifics, and subscription information 
+										within Zoho Subscriptions.
+									</p>
+									<p>
+										Furthermore, Zoho Flow plays a pivotal role as a two-way integration facilitator, ensuring seamless communication between Zoho Subscriptions and Shopify. 
+										Notably, it actively pushes relevant order information back to Shopify, eliminating the need for users to navigate both systems independently. This 
+										bidirectional synchronisation streamlines data accessibility for system users, consolidating all pertinent information within the Shopify interface.
+									</p>
+									<p>
+										To enhance troubleshooting and maintenance, Zoho Flow diligently records any technical errors in a log file, conveniently accessible via the web. 
+										This comprehensive error log enables swift identification and resolution of issues, ensuring a resilient and error-free integration between Shopify 
+										and Zoho Subscriptions.
+									</p>
+
+									<h4 class="major">Zoho Subscriptions</h4>
+									<p>
+										Zoho Subscriptions stands as the robust billing software dedicated to managing recurring orders and facilitating seamless automatic debiting from c
+										ustomers' accounts. Its versatility shines through, offering compatibility with a wide array of payment gateways such as Stripe, Authorize.net, 
+										Payflow Pro, Payments Pro, PayPal, and many more. This expansive support for diverse payment options makes Zoho Subscriptions highly adaptable and 
+										well-suited to cater to a broad spectrum of customer bases, ensuring flexibility and convenience in the payment processing landscape.
+									</p>
+
+									<p>
+										Every nuance of information displayed within Shopify, spanning contact details, item specifics, and more, seamlessly undergoes a meticulous one-to-one 
+										replication process within Zoho Subscriptions. This meticulous process yields an exact duplicate of the data housed in Shopify, fortified by the distinctive
+										features of Zoho Subscriptions. Beyond merely mirroring Shopify's data, Zoho Subscriptions distinguishes itself by autonomously tracking and managing
+										subscriptions, offering a comprehensive solution for streamlined direct debiting associated with the provided products or services.
+										</p>
+									<p>
+										In a reciprocal dynamic, for each subscription generated within Zoho Subscriptions, a corresponding Order is seamlessly crafted inside Shopify, 
+										mirroring the pertinent order details. This symbiotic relationship ensures coherence and synchronization between the two platforms, contributing to a 
+										cohesive and efficient operational workflow.
+
+									</p>
+									
+									<img src="../images/shopify-subscriptions-sequencediagram.png" alt="solution flow" style="display: block; margin: auto; width: 900px; height: 500px;"><br>
+
+									<h4 class="major">Customer Experience</h4>
+									<p>
+										The customer experience remains familiar, mirroring their existing order placement process. The key distinction in this enhanced 
+										solution lies in the automated periodic debiting, whether weekly, monthly, quarterly, or annually, from the customer's account. Additionally, 
+										Zoho Subscriptions efficiently generates and dispatches PDF invoices, providing customers with a transparent record of the payments received.
+									</p>
+
+									<h3 class="major">Conclusion</h3>
+									<p>
+										In conclusion, the seamless integration of Shopify with Zoho Subscriptions, facilitated by Zoho Flow, presents a transformative solution for businesses
+										 seeking streamlined order processing and automated recurring payments. This integration ensures a consistent and user-friendly experience for customers, 
+										 preserving the familiarity of their order placement process. The innovative approach of Zoho Subscriptions, with its ability to handle periodic direct 
+										 debiting and generate detailed PDF invoices, enhances operational efficiency and transparency. As businesses embrace this integration, they can anticipate a 
+										 harmonised system that not only simplifies order management but also establishes a robust foundation for sustained growth and customer satisfaction. The 
+										 collaborative synergy between Shopify, Zoho Flow, and Zoho Subscriptions opens new avenues for businesses to thrive in the dynamic e-commerce landscape.
+									</p>
+
+									<ul class="actions">
+										<li><a href="../works.html" class="button">Back to Works</a></li>
+									</ul>
+								</div>
+								
+							</div>
+
+					</section>
+
+				<!-- Footer -->
+					<section id="footer">
+						<div class="inner">
+							<h2 class="major">Get in touch</h2>
+							<ul class="contact">
+								<li class="icon solid fa-home">
+									Sydney, New South Wales<br />
+								</li>
+								<li class="icon solid fa-phone">(+61) 481-284-341</li>
+								<li class="icon solid fa-envelope"><a href="mailto:ibrahimgeorge1@gmail.com">ibrahimgeorge1@gmail.com</a></li>
+								<li class="icon brands fa-linkedin"><a href="https://www.linkedin.com/in/ibrahim-g-393955119/">Ibrahim George</a></li> 
+								<!--<li class="icon brands fa-twitter"><a href="#">twitter.com/untitled-tld</a></li> -->
+								<!--<li class="icon brands fa-facebook-f"><a href="#">facebook.com/untitled-tld</a></li> -->
+								<!--<li class="icon brands fa-instagram"><a href="#">instagram.com/untitled-tld</a></li> -->
+							</ul>
+							<ul class="copyright">
+								<!--<li>&copy; Untitled Inc. All rights reserved.</li>--><li>Design: <a href="http://html5up.net">HTML5 UP</a></li> 
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="../assets/js/jquery.min.js"></script>
+			<script src="../assets/js/jquery.scrollex.min.js"></script>
+			<script src="../assets/js/browser.min.js"></script>
+			<script src="../assets/js/breakpoints.min.js"></script>
+			<script src="../assets/js/util.js"></script>
+			<script src="../assets/js/main.js"></script>
+
+	</body>
+</html>
