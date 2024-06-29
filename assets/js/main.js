@@ -107,9 +107,9 @@
         .then((response) => {
           
           console.log('SUCCESS!', response.status, response.text);
-          alert('Your message has been sent!');
+          //alert('Your message has been sent!');
           
-          //window.location.href = 'submission_page.html'; // Redirect to the target page
+          window.location.href = 'thankyou.html'; // Redirect to the target page
         }, (error) => {
           console.log('FAILED...', error);
           alert('Failed to send your message. Please try again later.');
