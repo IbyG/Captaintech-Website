@@ -1,145 +1,122 @@
-/*
-	Solid State by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
-*/
+(function () {
+  "use strict";
 
-(function($) {
+  // ======= Sticky
+  window.onscroll = function () {
+    const ud_header = document.querySelector(".ud-header");
+    const sticky = ud_header.offsetTop;
+    const logo = document.querySelector(".navbar-brand img");
 
-	var	$window = $(window),
-		$body = $('body'),
-		$header = $('#header'),
-		$banner = $('#banner');
+    if (window.pageYOffset > sticky) {
+      ud_header.classList.add("sticky");
+    } else {
+      ud_header.classList.remove("sticky");
+    }
 
-	// Breakpoints.
-		breakpoints({
-			xlarge:	'(max-width: 1680px)',
-			large:	'(max-width: 1280px)',
-			medium:	'(max-width: 980px)',
-			small:	'(max-width: 736px)',
-			xsmall:	'(max-width: 480px)'
-		});
+    // === logo change
+    /*
+    if (ud_header.classList.contains("sticky")) {
+      logo.src = "assets/images/logo/logo-2.svg";
+    } else {
+      logo.src = "assets/images/logo/logo.svg";
+    }
+      */
 
-	// Play initial animations on page load.
-		$window.on('load', function() {
-			window.setTimeout(function() {
-				$body.removeClass('is-preload');
-			}, 100);
-		});
+    // show or hide the back-top-top button
+    const backToTop = document.querySelector(".back-to-top");
+    if (
+      document.body.scrollTop > 50 ||
+      document.documentElement.scrollTop > 50
+    ) {
+      backToTop.style.display = "flex";
+    } else {
+      backToTop.style.display = "none";
+    }
+  };
 
-	// Header.
-		if ($banner.length > 0
-		&&	$header.hasClass('alt')) {
+  //===== close navbar-collapse when a  clicked
+  let navbarToggler = document.querySelector(".navbar-toggler");
+  const navbarCollapse = document.querySelector(".navbar-collapse");
 
-			$window.on('resize', function() { $window.trigger('scroll'); });
+  document.querySelectorAll(".ud-menu-scroll").forEach((e) =>
+    e.addEventListener("click", () => {
+      navbarToggler.classList.remove("active");
+      navbarCollapse.classList.remove("show");
+    })
+  );
+  navbarToggler.addEventListener("click", function () {
+    navbarToggler.classList.toggle("active");
+    navbarCollapse.classList.toggle("show");
+  });
 
-			$banner.scrollex({
-				bottom:		$header.outerHeight(),
-				terminate:	function() { $header.removeClass('alt'); },
-				enter:		function() { $header.addClass('alt'); },
-				leave:		function() { $header.removeClass('alt'); }
-			});
+  // ===== submenu
+  const submenuButton = document.querySelectorAll(".nav-item-has-children");
+  submenuButton.forEach((elem) => {
+    elem.querySelector("a").addEventListener("click", () => {
+      elem.querySelector(".ud-submenu").classList.toggle("show");
+    });
+  });
 
-		}
+  // ===== wow js
+  new WOW().init();
 
-	// Menu.
-		var $menu = $('#menu');
+  // ====== scroll top js
+  function scrollTo(element, to = 0, duration = 500) {
+    const start = element.scrollTop;
+    const change = to - start;
+    const increment = 20;
+    let currentTime = 0;
 
-		$menu._locked = false;
+    const animateScroll = () => {
+      currentTime += increment;
 
-		$menu._lock = function() {
+      const val = Math.easeInOutQuad(currentTime, start, change, duration);
 
-			if ($menu._locked)
-				return false;
+      element.scrollTop = val;
 
-			$menu._locked = true;
+      if (currentTime < duration) {
+        setTimeout(animateScroll, increment);
+      }
+    };
 
-			window.setTimeout(function() {
-				$menu._locked = false;
-			}, 350);
+    animateScroll();
+  }
 
-			return true;
+  Math.easeInOutQuad = function (t, b, c, d) {
+    t /= d / 2;
+    if (t < 1) return (c / 2) * t * t + b;
+    t--;
+    return (-c / 2) * (t * (t - 2) - 1) + b;
+  };
 
-		};
+  document.querySelector(".back-to-top").onclick = () => {
+    scrollTo(document.documentElement);
+  };
 
-		$menu._show = function() {
 
-			if ($menu._lock())
-				$body.addClass('is-menu-visible');
+  document.addEventListener('DOMContentLoaded', function() {
+    emailjs.init('8NQOl5-QIZZKgHOFW'); // Replace with your EmailJS user ID
+  
+    document.getElementById('contactForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Prevent the default form submission
+  
+      const serviceID = 'service_olsz3kb'; // Replace with your EmailJS service ID
+      const templateID = 'template_v9jzuzt'; // Replace with your EmailJS template ID
+  
+      emailjs.sendForm(serviceID, templateID, this)
+        .then((response) => {
+          
+          console.log('SUCCESS!', response.status, response.text);
+          alert('Your message has been sent!');
+          
+          //window.location.href = 'submission_page.html'; // Redirect to the target page
+        }, (error) => {
+          console.log('FAILED...', error);
+          alert('Failed to send your message. Please try again later.');
+        });
+    });
+  });
 
-		};
 
-		$menu._hide = function() {
 
-			if ($menu._lock())
-				$body.removeClass('is-menu-visible');
-
-		};
-
-		$menu._toggle = function() {
-
-			if ($menu._lock())
-				$body.toggleClass('is-menu-visible');
-
-		};
-
-		$menu
-			.appendTo($body)
-			.on('click', function(event) {
-
-				event.stopPropagation();
-
-				// Hide.
-					$menu._hide();
-
-			})
-			.find('.inner')
-				.on('click', '.close', function(event) {
-
-					event.preventDefault();
-					event.stopPropagation();
-					event.stopImmediatePropagation();
-
-					// Hide.
-						$menu._hide();
-
-				})
-				.on('click', function(event) {
-					event.stopPropagation();
-				})
-				.on('click', 'a', function(event) {
-
-					var href = $(this).attr('href');
-
-					event.preventDefault();
-					event.stopPropagation();
-
-					// Hide.
-						$menu._hide();
-
-					// Redirect.
-						window.setTimeout(function() {
-							window.location.href = href;
-						}, 350);
-
-				});
-
-		$body
-			.on('click', 'a[href="#menu"]', function(event) {
-
-				event.stopPropagation();
-				event.preventDefault();
-
-				// Toggle.
-					$menu._toggle();
-
-			})
-			.on('keydown', function(event) {
-
-				// Hide on escape.
-					if (event.keyCode == 27)
-						$menu._hide();
-
-			});
-
-})(jQuery);
+})();

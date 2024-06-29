@@ -1,15 +1,25 @@
+<!-- =========
+
+	Template Name: Play
+	Author: UIdeck
+	Author URI: https://uideck.com/
+	Support: https://uideck.com/support/
+	Version: 1.1
+
+========== -->
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Blogs</title>
+    <title>Play | Open source Project by UIdeck</title>
 
     <!--====== Favicon Icon ======-->
     <link
       rel="shortcut icon"
-      href="assets/images/logo/Captain Tech - Oval Transparent Background COMPRESSED.png"
+      href="assets/images/favicon.svg"
       type="image/svg"
     />
 
@@ -26,11 +36,9 @@
         <div class="row">
           <div class="col-lg-12">
             <nav class="navbar navbar-expand-lg">
-                <a href="index.html">
-                <h3>
-                    <span class="captain">CAPTAIN</span><span class="tech">TECH</span>
-                  </h3>
-                </a>
+              <a class="navbar-brand" href="index.html">
+                <img src="assets/images/logo/logo.svg" alt="Logo" />
+              </a>
               <button class="navbar-toggler">
                 <span class="toggler-icon"> </span>
                 <span class="toggler-icon"> </span>
@@ -40,31 +48,21 @@
               <div class="navbar-collapse">
                 <ul id="nav" class="navbar-nav mx-auto">
                   <li class="nav-item">
-                    <a class="" href="/index.html">Home</a>
+                    <a class="ud-menu-scroll" href="#home">Home</a>
                   </li>
 
                   <li class="nav-item">
-                    <a class=""  href="/index.html#about">About</a>
+                    <a class="ud-menu-scroll" href="#about">About</a>
                   </li>
                   <li class="nav-item">
-                    <a class=""  href="/index.html#pricing">Pricing</a>
+                    <a class="ud-menu-scroll" href="#pricing">Pricing</a>
                   </li>
-                  <!--
                   <li class="nav-item">
                     <a class="ud-menu-scroll" href="#team">Team</a>
                   </li>
-                  -->
                   <li class="nav-item">
-                    <a class=""  href="/index.html#contact">Contact</a>
+                    <a class="ud-menu-scroll" href="#contact">Contact</a>
                   </li>
-
-                  <li class="nav-item">
-                    <a class="" href="/works.html">Blogs</a>
-                  </li>
-
-                  
-
-                  <!--
                   <li class="nav-item nav-item-has-children">
                     <a href="javascript:void(0)"> Pages </a>
                     <ul class="ud-submenu">
@@ -103,15 +101,9 @@
                       </li>
                     </ul>
                   </li>
-                  -->
                 </ul>
               </div>
 
-                  
-
-                
-                
-              <!--
               <div class="navbar-btn d-none d-sm-inline-block">
                 <a href="login.html" class="ud-main-btn ud-login-btn">
                   Sign In
@@ -120,7 +112,6 @@
                   Sign Up
                 </a>
               </div>
-              -->
             </nav>
           </div>
         </div>
@@ -134,7 +125,7 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="ud-banner-content">
-              <h1>Blogs</h1>
+              <h1>Login Page</h1>
             </div>
           </div>
         </div>
@@ -142,96 +133,80 @@
     </section>
     <!-- ====== Banner End ====== -->
 
-    <!-- ====== Blog Start ====== -->
-    <section class="ud-blog-grids">
+    <!-- ====== Login Start ====== -->
+    <section class="ud-login">
       <div class="container">
         <div class="row">
-            <!-- ====== Blog 1 Start ====== -->
-          <div class="col-lg-4 col-md-6">
-            <div class="ud-single-blog">
-              <div class="ud-blog-image">
-                <a href="/articles/Directus and Burstsms.html">
-                  <img src="assets/images/blog/direct-burstsms-article-logo.png" alt="blog" />
-                </a>
+          <div class="col-lg-12">
+            <div class="ud-login-wrapper">
+              <div class="ud-login-logo">
+                <img src="assets/images/logo/logo-2.svg" alt="logo" />
               </div>
-              <div class="ud-blog-content">
-                <!--
-                <span class="ud-blog-date">Dec 22, 2023</span>
-                -->
-                <h3 class="ud-blog-title">
-                  <a href="/articles/Directus and Burstsms.html">
-                    Directus + BurstSMS
-                  </a>
-                </h3>
-                <p class="ud-blog-desc">
-                  Innovative integration of Directus CMS and BurstSMS that can revolutionise your customer engagement by instantly notifying clients of approved deals through seamless SMS notifications..
-                </p>
+              <form class="ud-login-form">
+                <div class="ud-form-group">
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Email/username"
+                  />
+                </div>
+                <div class="ud-form-group">
+                  <input
+                    type="password"
+                    name="password"
+                    placeholder="*********"
+                  />
+                </div>
+                <div class="ud-form-group">
+                  <button type="submit" class="ud-main-btn w-100">Login</button>
+                </div>
+              </form>
+
+              <div class="ud-socials-connect">
+                <p>Connect With</p>
+
+                <ul>
+                  <li>
+                    <a href="javascript:void(0)" class="facebook">
+                      <i class="lni lni-facebook-filled"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)" class="twitter">
+                      <i class="lni lni-twitter-filled"></i>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="javascript:void(0)" class="google">
+                      <i class="lni lni-google"></i>
+                    </a>
+                  </li>
+                </ul>
               </div>
+
+              <a class="forget-pass" href="javascript:void(0)">
+                Forget Password?
+              </a>
+              <p class="signup-option">
+                Not a member yet? <a href="javascript:void(0)"> Sign Up </a>
+              </p>
             </div>
           </div>
-          <!-- ====== Blog 1 End ====== -->
-        <!-- ====== Blog 2 Start ====== -->
-          <div class="col-lg-4 col-md-6">
-            <div class="ud-single-blog">
-              <div class="ud-blog-image">
-                <a href="/articles/shopify-to-zoho-subscription.html">
-                  <img src="assets/images/blog/shopify-subscriptions.png" alt="blog" />
-                </a>
-              </div>
-              <div class="ud-blog-content">
-                <!--
-                <span class="ud-blog-date">Dec 22, 2023</span>
-                -->
-                <h3 class="ud-blog-title">
-                  <a href="/articles/shopify-to-zoho-subscription.html">
-                    Automating Recurring Payments: A deep dive into Shopify-Zoho Subscriptions Integration
-                  </a>
-                </h3>
-                <p class="ud-blog-desc">
-                  Maximise the power of your Shopify store by seamlessly integrating with Zoho Subscriptions, ensuring effortless order management and automated recurring payments to propel your e-commerce success.
-                </p>
-              </div>
-            </div>
-          </div>
-          <!-- ====== Blog 2 End ====== -->
-            <!-- ====== Blog 3 Start ====== -->
-          <div class="col-lg-4 col-md-6">
-            <div class="ud-single-blog">
-              <div class="ud-blog-image">
-                <a href="/articles/ETL Solution Empowering Logistics.html">
-                  <img src="assets/images/blog/Dataprep sample image.jpg" alt="blog" />
-                </a>
-              </div>
-              <div class="ud-blog-content">
-                <!--
-                <span class="ud-blog-date">Dec 22, 2023</span>
-                -->
-                <h3 class="ud-blog-title">
-                  <a href="/articles/ETL Solution Empowering Logistics.html">
-                    Enhancing Data Quality in Logistics Operations with Advanced ETL Architecture
-                  </a>
-                </h3>
-                <p class="ud-blog-desc">
-                  By leveraging Zoho DataPrep, we streamlined manual processing by an impressive 85%, with only outlier data requiring managerial attention—a testament to the tool's prowess in augmenting operational efficiency and data stewardship.
-                </p>
-              </div>
-            </div>
-          </div>
-          <!-- ====== Blog 3 End ====== -->
+        </div>
       </div>
     </section>
-    <!-- ====== Blog End ====== -->
+    <!-- ====== Login End ====== -->
 
     <!-- ====== Footer Start ====== -->
     <footer class="ud-footer wow fadeInUp" data-wow-delay=".15s">
       <div class="shape shape-1">
-        <img src="/assets/images/footer/shape-1.svg" alt="shape" />
+        <img src="assets/images/footer/shape-1.svg" alt="shape" />
       </div>
       <div class="shape shape-2">
-        <img src="/assets/images/footer/shape-2.svg" alt="shape" />
+        <img src="assets/images/footer/shape-2.svg" alt="shape" />
       </div>
       <div class="shape shape-3">
-        <img src="/assets/images/footer/shape-3.svg" alt="shape" />
+        <img src="assets/images/footer/shape-3.svg" alt="shape" />
       </div>
       <div class="ud-footer-widgets">
         <div class="container">
@@ -239,36 +214,30 @@
             <div class="col-xl-3 col-lg-4 col-md-6">
               <div class="ud-widget">
                 <a href="index.html" class="ud-footer-logo">
-                 <!-- <img src="assets/images/logo/logo.svg" alt="logo" />-->
-                 <img src="/assets/images/logo/Captain Tech - fully transparent.png" alt="Captaintech Logo" />
+                  <img src="assets/images/logo/logo.svg" alt="logo" />
                 </a>
                 <p class="ud-widget-desc">
-                 Comprehensive software solutions, secure hosting services, 
-                  and cutting-edge Content Management Systems (CMS). Discover how we empower businesses 
-                  with tailored technology to thrive online.  
+                  We create digital experiences for brands and companies by
+                  using technology.
                 </p>
                 <ul class="ud-widget-socials">
                   <li>
-                    <a href="https://www.facebook.com/profile.php?id=61560639217162">
+                    <a href="https://twitter.com/MusharofChy">
                       <i class="lni lni-facebook-filled"></i>
                     </a>
                   </li>
-                  <!--
                   <li>
                     <a href="https://twitter.com/MusharofChy">
                       <i class="lni lni-twitter-filled"></i>
                     </a>
                   </li>
-                  -->
-                  <!--
                   <li>
                     <a href="https://twitter.com/MusharofChy">
                       <i class="lni lni-instagram-filled"></i>
                     </a>
                   </li>
-                  -->
                   <li>
-                    <a href="https://www.linkedin.com/company/captain-tech/">
+                    <a href="https://twitter.com/MusharofChy">
                       <i class="lni lni-linkedin-original"></i>
                     </a>
                   </li>
@@ -278,64 +247,157 @@
 
             <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6">
               <div class="ud-widget">
-                <h5 class="ud-widget-title">Organisation</h5>
+                <h5 class="ud-widget-title">About Us</h5>
                 <ul class="ud-widget-links">
                   <li>
-                    <a href="/index.html">Home</a>
+                    <a href="javascript:void(0)">Home</a>
                   </li>
-                  <!--
                   <li>
                     <a href="javascript:void(0)">Features</a>
                   </li>
-                  -->
                   <li>
-                    <a href="/index.html#about">About</a>
+                    <a href="javascript:void(0)">About</a>
                   </li>
                   <li>
-                    <a href="/index.html#testimonials">Testimonial</a>
+                    <a href="javascript:void(0)">Testimonial</a>
                   </li>
                 </ul>
               </div>
             </div>
             <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6">
               <div class="ud-widget">
-                <h5 class="ud-widget-title">Legal Information</h5>
+                <h5 class="ud-widget-title">Features</h5>
                 <ul class="ud-widget-links">
-                  <!--
                   <li>
                     <a href="javascript:void(0)">How it works</a>
                   </li>
-                  -->
                   <li>
-                    <a href="/privacy_policy.html">Privacy policy</a>
+                    <a href="javascript:void(0)">Privacy policy</a>
                   </li>
                   <li>
-                    <a href="/terms_of_service.html">Terms of service</a>
+                    <a href="javascript:void(0)">Terms of service</a>
                   </li>
                   <li>
-                    <a href="/sla.html">Service Level Agreement</a>
+                    <a href="javascript:void(0)">Refund policy</a>
                   </li>
                 </ul>
               </div>
             </div>
-            
+            <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6">
+              <div class="ud-widget">
+                <h5 class="ud-widget-title">Our Products</h5>
+                <ul class="ud-widget-links">
+                  <li>
+                    <a
+                      href="https://lineicons.com/"
+                      rel="nofollow noopner"
+                      target="_blank"
+                      >Lineicons
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://ecommercehtml.com/"
+                      rel="nofollow noopner"
+                      target="_blank"
+                      >Ecommerce HTML</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://ayroui.com/"
+                      rel="nofollow noopner"
+                      target="_blank"
+                      >Ayro UI</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      href="https://graygrids.com/"
+                      rel="nofollow noopner"
+                      target="_blank"
+                      >Plain Admin</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </div>
             <div class="col-xl-3 col-lg-6 col-md-8 col-sm-10">
               <div class="ud-widget">
                 <h5 class="ud-widget-title">Partners</h5>
                 <ul class="ud-widget-brands">
                   <li>
                     <a
-                      href=""
+                      href="https://ayroui.com/"
                       rel="nofollow noopner"
                       target="_blank"
                     >
                       <img
-                        src="/assets/images/footer/brands/Basic-Light.png"
+                        src="assets/images/footer/brands/ayroui.svg"
                         alt="ayroui"
                       />
                     </a>
                   </li>
-                  
+                  <li>
+                    <a
+                      href="https://ecommercehtml.com/"
+                      rel="nofollow noopner"
+                      target="_blank"
+                    >
+                      <img
+                        src="assets/images/footer/brands/ecommerce-html.svg"
+                        alt="ecommerce-html"
+                      />
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://graygrids.com/"
+                      rel="nofollow noopner"
+                      target="_blank"
+                    >
+                      <img
+                        src="assets/images/footer/brands/graygrids.svg"
+                        alt="graygrids"
+                      />
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://lineicons.com/"
+                      rel="nofollow noopner"
+                      target="_blank"
+                    >
+                      <img
+                        src="assets/images/footer/brands/lineicons.svg"
+                        alt="lineicons"
+                      />
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://uideck.com/"
+                      rel="nofollow noopner"
+                      target="_blank"
+                    >
+                      <img
+                        src="assets/images/footer/brands/uideck.svg"
+                        alt="uideck"
+                      />
+                    </a>
+                  </li>
+                  <li>
+                    <a
+                      href="https://tailwindtemplates.co/"
+                      rel="nofollow noopner"
+                      target="_blank"
+                    >
+                      <img
+                        src="assets/images/footer/brands/tailwindtemplates.svg"
+                        alt="tailwindtemplates"
+                      />
+                    </a>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -348,25 +410,22 @@
             <div class="col-md-8">
               <ul class="ud-footer-bottom-left">
                 <li>
-                  <a href="/privacy_policy.html">Privacy policy</a>
-                </li>
-                
-                <li>
-                  <a href="/terms_of_service.html">Terms of service</a>
+                  <a href="javascript:void(0)">Privacy policy</a>
                 </li>
                 <li>
-                  <a href="/sla.html">Service Level Agreement</a>
+                  <a href="javascript:void(0)">Support policy</a>
+                </li>
+                <li>
+                  <a href="javascript:void(0)">Terms of service</a>
                 </li>
               </ul>
             </div>
-            
             <div class="col-md-4">
               <p class="ud-footer-bottom-right">
-                © Captaintech Pty Ltd
-               <!-- <a href="https://uideck.com" rel="nofollow">UIdeck</a>-->
+                Designed and Developed by
+                <a href="https://uideck.com" rel="nofollow">UIdeck</a>
               </p>
             </div>
-            
           </div>
         </div>
       </div>
