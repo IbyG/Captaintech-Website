@@ -4,8 +4,9 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BurstSMS Integration with Directus</title>
-    <meta name="description" content="Article on Burstsms integration with Directus">
+    <title>Auto-Scaling Directus CMS System Article</title>
+    <meta name="description" content="Article on scaling directus with kubernetes via the linode hosting structure">
+    
 
     <!--====== Favicon Icon ======-->
     <link
@@ -135,8 +136,7 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="ud-banner-content">
-              <h1>ENHANCE CUSTOMER ENGAGEMENT WITH
-                DIRECTUS CMS AND BURSTSMS INTEGRATION</h1>
+              <h1>Auto-Scaling Directus CMS System</h1>
             </div>
           </div>
         </div>
@@ -147,7 +147,7 @@
     <!-- ====== Blog Details Start ====== -->
     <section class="ud-blog-details">
       <div class="container">
-
+        
         <!--
         <div class="row">
             
@@ -190,83 +190,153 @@
         
           </div>
           -->
-        
-          
 
           <div class="col-lg-12">
             <div class="ud-blog-details-content">
-                <div class="col-lg-7 ud-hero-image wow fadeInUp"><span class="image fit"><img src="/assets/images/blog/direct-burstsms-article-logo.png" alt=" Directus Flow sample layout" /></span></div>
+                <div class="col-lg-7 ud-hero-image wow fadeInUp"><span class="image fit"><img src="https://media.licdn.com/dms/image/D5612AQH4jjdH4TlUCw/article-cover_image-shrink_720_1280/0/1719368285200?e=1726099200&v=beta&t=vQrny4mXEha4zEwJKvT9s1OM-4RwmFBb0n-ryxroMCs" alt=" Directus Flow sample layout" /></span></div>
                 <br><br>
-                <p class="ud-blog-details-para">
-                    At Captaintech, we are always on the lookout for innovative ways to improve customer engagement and streamline business operations. Recently, we had the opportunity to build a powerful functionality for one of our clients that seamlessly integrates Directus CMS with BurstSMS to send SMS notifications when a deal is approved. This article explores how this integration works and how it can benefit businesses looking to keep their customers informed in real-time.
-                </p>
-                <h2 class="ud-blog-details-title">
-                    Introducing Directus CMS and BurstSMS
-                </h2>
-
-                <h3 class="ud-blog-details-subtitle">Directus CMS</h3>
-                
-                <p class="ud-blog-details-para">
-                    Directus is an open-source headless CMS that offers a highly flexible and powerful backend for managing content. It supports various databases and provides an API that makes integration with other services straightforward and efficient. This flexibility makes Directus an ideal choice for businesses that need a robust content management system.
-                </p>
+              <h2 class="ud-blog-details-title">
+                Overview
+              </h2>
+              <p class="ud-blog-details-para">
+                This document outlines a cutting-edge solution for implementing an auto-scaling Directus CMS system using Kubernetes on Linode. By leveraging containerization, Kubernetes orchestration, and a centralised database system, this solution ensures high availability, scalability, and reliability. Key components include Directus instances, a MariaDB database server, a load balancer, and automated scaling to meet demand.
+              </p>
 
 
-                <h3 class="ud-blog-details-subtitle">BurstSMS</h3>
+              <h3 class="ud-blog-details-subtitle">Architecture</h3>
+              <h4 >Components</h4>
+              <br>
+              <h5 >Directus Instances:</h5>
 
-                <p class="ud-blog-details-para">
-                    BurstSMS is a global SMS messaging platform that enables businesses to send and receive text messages efficiently. With its reliable API, BurstSMS allows seamless integration with various systems, ensuring that businesses can reach their customers instantly and effectively.
-                </p>
+              <ul style="padding-left: 20px;">
+                <li>- Multiple containerized Directus CMS instances are deployed as Kubernetes pods.</li>
+                <li>- Each instance connects to a central MariaDB database for data read/write operations.</li>
+              </ul>
+              <br>
+              <h5 >MariaDB Server:</h5>
+              <ul style="padding-left: 20px;">
+                <li>- A single MariaDB instance is hosted on a separate server to handle all database operations.</li>
+                <li>- Configured for regular backups and synchronised with a data warehouse for analytics.</li>
+              </ul>
+              <br>
+              <h5 >Kubernetes Cluster:</h5>
+              <ul style="padding-left: 20px;">
+                <li>- Manages the deployment, scaling, and operation of Directus instances.</li>
+                <li>- A Kubernetes Service acts as a load balancer to distribute incoming traffic.</li>
+              </ul>
+              <br>
+              <h5 >Linode Hosting:</h5>
+              <ul style="padding-left: 20px;">
+                <li>- Provides virtual machines for hosting Kubernetes nodes, Directus instances, and the MariaDB server.</li>
+                <li>- Utilises Linode's NodeBalancer service to handle load balancing between Directus instances.</li>
+              </ul>
+              <br>
+              <div class="col-lg-12 ud-hero-image wow fadeInUp"><span class="image fit"><img src="/assets/images/blog/Autoscaling Directus Using Kubernetes.gif" alt=" Autoscaling directus with kubernetes gif" /></span></div>
+                <br><br>
 
 
-                <h3 class="ud-blog-details-subtitle">The Power of Integration</h3>
+            <h3 class="ud-blog-details-subtitle">Kubernetes Deployment Files</h3>
+            <h4 >Directus Deployment</h4>
+            <br>
+            <p class="ud-blog-details-para">
+                This deployment file manages the Directus CMS instances as Kubernetes pods. It configures 4 replicas of the Directus pod using the directus/directus:latest image. Each pod is set to connect to the central MariaDB database using environment variables. The service also exposes the Directus deployment as a LoadBalancer service, mapping external port 80 to the container port 8055, and distributes traffic to the pods labelled app: directus.
+            </p>
 
-                <p class="ud-blog-details-para">
-                    By integrating Directus CMS with BurstSMS, Captaintech has enabled a seamless process for our client to automatically notify their customers when a deal is approved. This integration ensures that customers are kept in the loop and can act promptly on the information they receive.
-                </p>
+              <pre><code>
+                apiVersion: apps/v1
+                kind: Deployment
+                metadata:
+                name: directus-deployment
+                spec:
+                replicas: 4
+                selector:
+                    matchLabels:
+                    app: directus
+                template:
+                    metadata:
+                    labels:
+                        app: directus
+                    spec:
+                    containers:
+                    - name: directus
+                        image: directus/directus:latest
+                        ports:
+                        - containerPort: 8055
+                        env:
+                        - name: DATABASE_CLIENT
+                        value: "mariadb"
+                        - name: DATABASE_HOST
+                        value: "<MariaDB_Server_IP>"
+                        - name: DATABASE_PORT
+                        value: "3306"
+                        - name: DATABASE_NAME
+                        value: "directus"
+                        - name: DATABASE_USER
+                        value: "directus_user"
+                        - name: DATABASE_PASSWORD
+                        value: "directus_password"
+                ---
+                apiVersion: v1
+                kind: Service
+                metadata:
+                name: directus-service
+                spec:
+                type: LoadBalancer
+                selector:
+                    app: directus
+                ports:
+                - port: 80
+                    targetPort: 8055
+              </code>
+              </pre>
 
-                <h2 class="ud-blog-details-title">
-                    How It Works
-                </h2>
+              <h4 >Horizontal Pod Autoscaler</h4>
+              <br>
+              <p class="ud-blog-details-para">
+                The Horizontal Pod Autoscaler (HPA), named directus-hpa, dynamically adjusts the number of pods in the directus-deployment based on real-time CPU and memory usage. It ensures a minimum of 3 replicas and can scale up to a maximum of 10 replicas. The HPA aims to maintain average CPU and memory utilisation at 70%, optimising resource usage and application performance.
+              </p>
 
-                <h3 class="ud-blog-details-subtitle">Deal Approval in Directus CMS:</h3>
+              <pre><code>
+                apiVersion: autoscaling/v2beta2
+                kind: HorizontalPodAutoscaler
+                metadata:
+                  name: directus-hpa
+                spec:
+                  scaleTargetRef:
+                    apiVersion: apps/v1
+                    kind: Deployment
+                    name: directus-deployment
+                  minReplicas: 3
+                  maxReplicas: 10
+                  metrics:
+                  - type: Resource
+                    resource:
+                      name: cpu
+                      target:
+                        type: Utilization
+                        averageUtilization: 70
+                  - type: Resource
+                    resource:
+                      name: memory
+                      target:
+                        type: Utilization
+                        averageUtilization: 70   
+              </code></pre>
 
-                <p class="ud-blog-details-para">
-                    When a deal is approved in Directus, a flow is triggered checking that status field. This webhook then sends a request to a custom serverless function we created.
-                </p>
+              <h4 >Benefits</h4>
+              <br>
+              <ul style="padding-left: 20px;">
+                <li>- <strong> Scalability:</strong> Dynamically scales the service in response to increased demand, ensuring optimal performance.</li>
+                <li>- <strong>High Availability:</strong>  Ensures continuous availability of Directus instances with even traffic distribution by the load balancer.</li>
+                <li>- <strong> Data Integrity:</strong> The centralised MariaDB server maintains consistent data integrity through regular backups and synchronisation with the data warehouse.</li>
+                <li>- <Strong> Cost Efficiency: </Strong> Unlike a monolithic architecture, this implementation scales with demand, allocating resources based on actual usage and minimising unnecessary costs.</li>
+                <li>- <Strong> Optimised Resource Management:</Strong> Kubernetes handles the uptime, supply, and demand of resources and servers to provide the most optimal experience for users. By automatically managing the infrastructure, Kubernetes ensures that resources are allocated efficiently, reducing downtime and maintaining high performance. This allows DevOps teams to focus on improving and enhancing the service rather than managing the underlying infrastructure.</li>
+              </ul>
+              <br>
 
-                
-                <div class="col-lg-5 ud-hero-image wow fadeInUp"><span class="image fit"><img src="/assets/images/blog/directus-burstsms-deal.png" alt="Directus Deal Scheme Layout" /></span></div>
-                <br>
-                <div class="col-lg-7 ud-hero-image wow fadeInUp"><span class="image fit"><img src="/assets/images/blog/directus-burstsms-deal-flow.png" alt=" Directus Flow sample layout" /></span></div>
-                <br>
-
-                <h3 class="ud-blog-details-subtitle">Sending the SMS via BurstSMS:</h3>
-
-                <p class="ud-blog-details-para">
-                    Using the BurstSMS API, the serverless function sends an SMS notification to the customer, informing them that their deal has been approved.
-                </p>
-
-                <div class="col-lg-3 ud-hero-image wow fadeInUp"><span class="image fit"><img src="/assets/images/blog/directus-burstsms-deal-sms.png" alt="Screenshot of Burstsms text message on user phone" /></span></div>
-                <br>
-                <h2 class="ud-blog-details-title">
-                    Benefits for Businesses
-                </h2>
-
-                <h3 class="ud-blog-details-subtitle">Real-Time Notifications</h3>
-                <p class="ud-blog-details-para">
-                    This integration ensures that customers receive real-time updates about their deals. Significantly enhancing customer satisfaction and trust.
-                </p>
-
-                <h3 class="ud-blog-details-subtitle">Improved Customer Engagement</h3>
-
-                <p class="ud-blog-details-para">
-                    By keeping customers informed, there is a stroner engagement and the opportunity to foster stronger relationships. Customers appreciate timely and relevant updates, which can lead to increased loyalty and repeat business.
-                </p>
-
-                <h3 class="ud-blog-details-subtitle">Captaintech’s Role</h3>
-                <p class="ud-blog-details-para">
-                    At Captaintech, we pride ourselves on delivering innovative solutions tailored to our clients' needs. This Directus CMS and BurstSMS integration is just one example of how we leverage technology to enhance business operations and customer experience. Our team of experts is ready to help you implement similar solutions to drive your business forward.
-                </p>
+              <p class="ud-blog-details-para">
+                By implementing this solution, your organisation will benefit from a robust, scalable, and cost-effective Directus CMS system that meets growing business demands efficiently.
+              </p>
 
 
 
@@ -506,91 +576,133 @@
 
     <!-- ====== Footer Start ====== -->
     <footer class="ud-footer wow fadeInUp" data-wow-delay=".15s">
-      <div class="shape shape-1">
-        <img src="/assets/images/footer/shape-1.svg" alt="shape" />
-      </div>
-      <div class="shape shape-2">
-        <img src="/assets/images/footer/shape-2.svg" alt="shape" />
-      </div>
-      <div class="shape shape-3">
-        <img src="/assets/images/footer/shape-3.svg" alt="shape" />
-      </div>
-      <div class="ud-footer-widgets">
-        <div class="container">
-          <div class="row">
-            <div class="col-xl-3 col-lg-4 col-md-6">
-              <div class="ud-widget">
-                <a href="index.html" class="ud-footer-logo">
-                 <!-- <img src="assets/images/logo/logo.svg" alt="logo" />-->
-                 <img src="/assets/images/logo/Captain Tech - fully transparent.png" alt="Captaintech Logo" />
-                </a>
-                <p class="ud-widget-desc">
-                 Comprehensive software solutions, secure hosting services, 
-                  and cutting-edge Content Management Systems (CMS). Discover how we empower businesses 
-                  with tailored technology to thrive online.  
-                </p>
-                <ul class="ud-widget-socials">
-                  <li>
-                    <a href="https://www.facebook.com/profile.php?id=61560639217162">
-                      <i class="lni lni-facebook-filled"></i>
-                    </a>
-                  </li>
-                  <!--
-                  <li>
-                    <a href="https://twitter.com/MusharofChy">
-                      <i class="lni lni-twitter-filled"></i>
-                    </a>
-                  </li>
-                  -->
-                  <!--
-                  <li>
-                    <a href="https://twitter.com/MusharofChy">
-                      <i class="lni lni-instagram-filled"></i>
-                    </a>
-                  </li>
-                  -->
-                  <li>
-                    <a href="https://www.linkedin.com/company/captain-tech/">
-                      <i class="lni lni-linkedin-original"></i>
-                    </a>
-                  </li>
-                </ul>
+        <div class="shape shape-1">
+          <img src="/assets/images/footer/shape-1.svg" alt="shape" />
+        </div>
+        <div class="shape shape-2">
+          <img src="/assets/images/footer/shape-2.svg" alt="shape" />
+        </div>
+        <div class="shape shape-3">
+          <img src="/assets/images/footer/shape-3.svg" alt="shape" />
+        </div>
+        <div class="ud-footer-widgets">
+          <div class="container">
+            <div class="row">
+              <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="ud-widget">
+                  <a href="index.html" class="ud-footer-logo">
+                   <!-- <img src="assets/images/logo/logo.svg" alt="logo" />-->
+                   <img src="/assets/images/logo/Captain Tech - fully transparent.png" alt="Captaintech Logo" />
+                  </a>
+                  <p class="ud-widget-desc">
+                   Comprehensive software solutions, secure hosting services, 
+                    and cutting-edge Content Management Systems (CMS). Discover how we empower businesses 
+                    with tailored technology to thrive online.  
+                  </p>
+                  <ul class="ud-widget-socials">
+                    <li>
+                      <a href="https://www.facebook.com/profile.php?id=61560639217162">
+                        <i class="lni lni-facebook-filled"></i>
+                      </a>
+                    </li>
+                    <!--
+                    <li>
+                      <a href="https://twitter.com/MusharofChy">
+                        <i class="lni lni-twitter-filled"></i>
+                      </a>
+                    </li>
+                    -->
+                    <!--
+                    <li>
+                      <a href="https://twitter.com/MusharofChy">
+                        <i class="lni lni-instagram-filled"></i>
+                      </a>
+                    </li>
+                    -->
+                    <li>
+                      <a href="https://www.linkedin.com/company/captain-tech/">
+                        <i class="lni lni-linkedin-original"></i>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+  
+              <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6">
+                <div class="ud-widget">
+                  <h5 class="ud-widget-title">Organisation</h5>
+                  <ul class="ud-widget-links">
+                    <li>
+                      <a href="/index.html">Home</a>
+                    </li>
+                    <!--
+                    <li>
+                      <a href="javascript:void(0)">Features</a>
+                    </li>
+                    -->
+                    <li>
+                      <a href="/index.html#about">About</a>
+                    </li>
+                    <li>
+                      <a href="/index.html#testimonials">Testimonial</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6">
+                <div class="ud-widget">
+                  <h5 class="ud-widget-title">Legal Information</h5>
+                  <ul class="ud-widget-links">
+                    <!--
+                    <li>
+                      <a href="javascript:void(0)">How it works</a>
+                    </li>
+                    -->
+                    <li>
+                      <a href="/privacy_policy.html">Privacy policy</a>
+                    </li>
+                    <li>
+                      <a href="/terms_of_service.html">Terms of service</a>
+                    </li>
+                    <li>
+                      <a href="/sla.html">Service Level Agreement</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              
+              <div class="col-xl-3 col-lg-6 col-md-8 col-sm-10">
+                <div class="ud-widget">
+                  <h5 class="ud-widget-title">Partners</h5>
+                  <ul class="ud-widget-brands">
+                    <li>
+                      <a
+                        href=""
+                        rel="nofollow noopner"
+                        target="_blank"
+                      >
+                        <img
+                          src="/assets/images/footer/brands/Basic-Light.png"
+                          alt="ayroui"
+                        />
+                      </a>
+                    </li>
+                    
+                  </ul>
+                </div>
               </div>
             </div>
-
-            <div class="col-xl-2 col-lg-2 col-md-6 col-sm-6">
-              <div class="ud-widget">
-                <h5 class="ud-widget-title">Organisation</h5>
-                <ul class="ud-widget-links">
-                  <li>
-                    <a href="/index.html">Home</a>
-                  </li>
-                  <!--
-                  <li>
-                    <a href="javascript:void(0)">Features</a>
-                  </li>
-                  -->
-                  <li>
-                    <a href="/index.html#about">About</a>
-                  </li>
-                  <li>
-                    <a href="/index.html#testimonials">Testimonial</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <div class="col-xl-2 col-lg-3 col-md-6 col-sm-6">
-              <div class="ud-widget">
-                <h5 class="ud-widget-title">Legal Information</h5>
-                <ul class="ud-widget-links">
-                  <!--
-                  <li>
-                    <a href="javascript:void(0)">How it works</a>
-                  </li>
-                  -->
+          </div>
+        </div>
+        <div class="ud-footer-bottom">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-8">
+                <ul class="ud-footer-bottom-left">
                   <li>
                     <a href="/privacy_policy.html">Privacy policy</a>
                   </li>
+                  
                   <li>
                     <a href="/terms_of_service.html">Terms of service</a>
                   </li>
@@ -599,60 +711,18 @@
                   </li>
                 </ul>
               </div>
-            </div>
-            
-            <div class="col-xl-3 col-lg-6 col-md-8 col-sm-10">
-              <div class="ud-widget">
-                <h5 class="ud-widget-title">Partners</h5>
-                <ul class="ud-widget-brands">
-                  <li>
-                    <a
-                      href=""
-                      rel="nofollow noopner"
-                      target="_blank"
-                    >
-                      <img
-                        src="/assets/images/footer/brands/Basic-Light.png"
-                        alt="ayroui"
-                      />
-                    </a>
-                  </li>
-                  
-                </ul>
+              
+              <div class="col-md-4">
+                <p class="ud-footer-bottom-right">
+                  © Captaintech
+                 <!-- <a href="https://uideck.com" rel="nofollow">UIdeck</a>-->
+                </p>
               </div>
+              
             </div>
           </div>
         </div>
-      </div>
-      <div class="ud-footer-bottom">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-8">
-              <ul class="ud-footer-bottom-left">
-                <li>
-                  <a href="/privacy_policy.html">Privacy policy</a>
-                </li>
-                
-                <li>
-                  <a href="/terms_of_service.html">Terms of service</a>
-                </li>
-                <li>
-                  <a href="/sla.html">Service Level Agreement</a>
-                </li>
-              </ul>
-            </div>
-            
-            <div class="col-md-4">
-              <p class="ud-footer-bottom-right">
-                © Captaintech
-               <!-- <a href="https://uideck.com" rel="nofollow">UIdeck</a>-->
-              </p>
-            </div>
-            
-          </div>
-        </div>
-      </div>
-    </footer>
+      </footer>
     <!-- ====== Footer End ====== -->
 
     <!-- ====== Back To Top Start ====== -->
