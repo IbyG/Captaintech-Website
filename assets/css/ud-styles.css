@@ -2617,4 +2617,9 @@ p {
   display: inline-block;
   margin-right: 10px; /* Adjust the spacing between items */
 }
+@media (max-width: 767px) {
+  .hide-on-phone {
+    display: none;
+  }
+}
 
