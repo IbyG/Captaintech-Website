@@ -778,6 +778,11 @@ p {
   padding: 120px 0;
 }
 
+.ud-about2 {
+
+  padding: 120px 0;
+}
+
 @media (max-width: 767px) {
   .ud-about {
     padding: 80px 0;
@@ -787,6 +792,17 @@ p {
 .ud-about-wrapper {
   background: var(--white);
   border: 1px solid rgba(0, 0, 0, 0.08);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.ud-about-wrapper-noborder {
+  background: var(--white);
+  border: 1px solid rgba(0, 0, 0, 0);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -2623,3 +2639,6 @@ p {
   }
 }
 
+.white-lines {
+  filter: grayscale(100%) invert(100%);
+}
